@@ -1,0 +1,406 @@
+title: Vautrin_Talk_Stay
+tags: 深度对话, 魏特琳, 留守原因
+---
+<<if $rel_vautrin >= 30>>
+
+魏特琳: {站在窗边，看着安全区} "Mr. Chen, do you know why I stayed?"
+
+陈默: {用英语} "Why, Miss Vautrin?"
+
+魏特琳: {转身，微笑} "Many people asked me to leave... The embassy, my colleagues, even my family..."
+
+魏特琳: "They said it's too dangerous... A woman alone in a war zone..."
+
+魏特琳: {坚定} "But how could I leave? How could I abandon these people?"
+
+魏特琳: "I've been in China for 28 years... I've taught thousands of Chinese girls..."
+
+魏特琳: {温柔} "They call me '华小姐'... They trust me... They need me..."
+
+陈默: "您是个伟大的人。"
+
+魏特琳: {摇头} "No, not great... Just doing what I should do."
+
+魏特琳: "When I came to China in 1912, I made a promise to God..."
+
+魏特琳: "I promised to serve the Chinese people, to help them, especially women and children..."
+
+魏特琳: {看着远处} "Now they need me the most... How can I break my promise?"
+
+-> [敬佩]"The world needs more people like you."
+    <<set $rel_vautrin += 10>>
+    魏特琳: {微笑} "Thank you, but I'm just one person doing one thing."
+    <<jump Vautrin_Talk_Stay_Continue>>
+
+-> [担心]"But you also need to protect yourself."
+    <<set $rel_vautrin += 8>>
+    <<set $concern_shown = true>>
+    魏特琳: {感动} "I appreciate your concern, but I'll be fine."
+    <<jump Vautrin_Talk_Stay_Continue>>
+
+<<else>>
+魏特琳: "Good day, Mr. Chen."
+陈默: "Good day, Miss Vautrin."
+[关系不足，无法深入交谈]
+===
+
+title: Vautrin_Talk_Stay_Continue
+tags: 深度对话, 魏特琳
+---
+魏特琳: "You know what keeps me going?"
+
+魏特琳: {指着窗外} "Look at those women and children..."
+
+魏特琳: "Every day, more people come to the Safety Zone..."
+
+魏特琳: "They're scared, hungry, desperate... But when they see this place..."
+
+魏特琳: {眼中有光} "They see hope... They know they're safe here..."
+
+魏特琳: "That's why I stay... To be that hope for them..."
+
+陈默: {感动} "您已经拯救了很多人。"
+
+魏特琳: "Not enough... Never enough... There are so many more outside..."
+
+魏特琳: {疲惫} "Sometimes I wish I could do more... Be in more places..."
+
+<<set $vautrin_mission_understood = true>>
+<<set $rel_vautrin += 10>>
+
+===
+
+title: Vautrin_Talk_Faith
+tags: 深度对话, 魏特琳, 信仰
+---
+<<if $rel_vautrin >= 50>>
+
+[场景：夜晚，魏特琳在小礼拜堂祈祷]
+
+陈默: {轻声} "Miss Vautrin... Sorry to disturb you..."
+
+魏特琳: {睁开眼睛，微笑} "It's alright, Mr. Chen. Please, come in."
+
+陈默: {坐下} "You pray every night?"
+
+魏特琳: "Yes... It's my source of strength..."
+
+魏特琳: {双手合十} "When I see so much suffering... So much evil..."
+
+魏特琳: "I need to remember that God is still there... That there's still good in this world..."
+
+陈默: "Do you ever doubt?"
+
+魏特琳: {沉默片刻} "...Yes. Often."
+
+魏特琳: "When I see a mother holding her dead child..."
+
+魏特琳: "When I see girls who've been violated..."
+
+魏特琳: "When I see such cruelty... Such inhumanity..."
+
+魏特琳: {声音颤抖} "I ask God... Why? Why allow this?"
+
+陈默: "What's your answer?"
+
+魏特琳: "I don't have answers... Only faith..."
+
+魏特琳: "Faith that even in darkness, there's light..."
+
+魏特琳: "Faith that what we do matters..."
+
+魏特琳: {坚定} "Faith that love is stronger than hate..."
+
+-> [共鸣]"Your faith is inspiring."
+    <<set $rel_vautrin += 12>>
+    魏特琳: "Thank you... Sometimes I need to hear that..."
+    <<jump Vautrin_Talk_Faith_Continue>>
+
+-> [质疑]"But how can you maintain faith seeing all this?"
+    <<set $rel_vautrin += 10>>
+    <<set $deep_conversation = true>>
+    魏特琳: {苦笑} "That's the hardest question..."
+    <<jump Vautrin_Talk_Faith_Deep>>
+
+<<else>>
+[关系不足，无法进行此对话]
+===
+
+title: Vautrin_Talk_Faith_Continue
+tags: 深度对话, 魏特琳
+---
+魏特琳: "You know what I pray for?"
+
+魏特琳: "I pray for strength... Not just for me, but for everyone here..."
+
+魏特琳: "I pray for those soldiers who've lost their way..."
+
+魏特琳: "I pray for the victims... That they can find peace..."
+
+魏特琳: {看着陈默} "And I pray for people like you..."
+
+魏特琳: "Those who choose to help even when it's dangerous..."
+
+陈默: "我只是做我能做的……"
+
+魏特琳: "That's all any of us can do... But it's everything..."
+
+<<set $vautrin_faith_shared = true>>
+<<set $rel_vautrin += 10>>
+
+===
+
+title: Vautrin_Talk_Faith_Deep
+tags: 深度对话, 魏特琳, 深层信仰
+---
+魏特琳: {深吸一口气} "Honestly, Mr. Chen... Sometimes I feel my faith breaking..."
+
+魏特琳: "When I can't save someone... When I have to turn people away because there's no room..."
+
+魏特琳: "When I hear the screams at night... And I can do nothing..."
+
+魏特琳: {眼泪滑落} "I feel so... powerless..."
+
+陈默: {递上手帕}
+
+魏特琳: {接过，擦泪} "Thank you..."
+
+魏特琳: "But then I remember... Even if I save just one person..."
+
+魏特琳: "To that person, I've changed everything..."
+
+魏特琳: "And that... That's worth it..."
+
+<<set $vautrin_vulnerability_shown = true>>
+<<set $rel_vautrin += 15>>
+
+===
+
+title: Vautrin_Talk_Refugees
+tags: 深度对话, 魏特琳, 难民故事
+---
+<<if $rel_vautrin >= 40>>
+
+魏特琳: {翻着笔记本} "Mr. Chen, let me tell you some stories..."
+
+魏特琳: "Yesterday, a woman came with three children..."
+
+魏特琳: "Her husband was taken by soldiers... She doesn't know if he's alive..."
+
+魏特琳: "She walked for three days to get here... Her feet were bleeding..."
+
+魏特琳: {翻页} "There's a girl, only 14... She was hiding in a pond for two days..."
+
+魏特琳: "When we found her, she was nearly frozen... But alive..."
+
+魏特琳: "She won't talk... She just stares... But at least she's safe now..."
+
+魏特琳: {继续翻} "An old man brought his granddaughter..."
+
+魏特琳: "His whole family died... Only this little girl survived..."
+
+魏特琳: "He begged us to take her... He said he was too old, too weak..."
+
+魏特琳: "He just wanted her to live..."
+
+陈默: {沉重} "So many tragedies..."
+
+魏特琳: "Yes... And these are just three stories... I have hundreds..."
+
+魏特琳: {合上笔记本} "I write them all down... Every single one..."
+
+魏特琳: "Someone needs to remember... Someone needs to tell the world..."
+
+魏特琳: {坚定} "This cannot be forgotten... This cannot happen again..."
+
+陈默: {内心} 可是历史会重复……在其他地方……其他时代……
+
+-> [支持]"I'll help you document everything."
+    <<set $rel_vautrin += 12>>
+    <<set $documentation_helper = true>>
+    魏特琳: {感激} "Thank you... That means a lot..."
+    <<jump Vautrin_Talk_Refugees_End>>
+
+-> [承诺]"Their stories will be remembered. I promise."
+    <<set $rel_vautrin += 10>>
+    <<set $memory_promise = true>>
+    魏特琳: "I believe you... Thank you..."
+    <<jump Vautrin_Talk_Refugees_End>>
+
+<<else>>
+[关系不足，无法进行此对话]
+===
+
+title: Vautrin_Talk_Refugees_End
+tags: 深度对话, 魏特琳
+---
+魏特琳: "Every person here has a story..."
+
+魏特琳: "They're not just numbers... Not just refugees..."
+
+魏特琳: "They're mothers, daughters, sisters... Each with hopes, dreams, fears..."
+
+魏特琳: {看着陈默} "We must never forget that..."
+
+魏特琳: "No matter how many people there are... Each life matters..."
+
+<<set $refugee_stories_heard = true>>
+<<set $rel_vautrin += 10>>
+
+===
+
+title: Vautrin_Talk_Humanity
+tags: 深度对话, 魏特琳, 人性反思
+---
+<<if $rel_vautrin >= 60 and $vautrin_faith_shared == true>>
+
+[场景：深夜，办公室，魏特琳疲惫不堪]
+
+魏特琳: {看着陈默} "Mr. Chen... Can I ask you something?"
+
+陈默: "Of course."
+
+魏特琳: "Do you believe humans are fundamentally good or evil?"
+
+陈默: {思考} "Why do you ask?"
+
+魏特琳: "I used to believe people are inherently good..."
+
+魏特琳: "That evil comes from ignorance, poverty, desperation..."
+
+魏特琳: {痛苦} "But what I've seen here... The cruelty, the violence..."
+
+魏特琳: "Some of those soldiers... They enjoy it..."
+
+魏特琳: "They smile while hurting people... They laugh..."
+
+魏特琳: {颤抖} "How can that be ignorance? That's... That's pure evil..."
+
+陈默: "But you're still here, helping people. That's goodness."
+
+魏特琳: "Yes, but... For every one of me, there are hundreds of them..."
+
+魏特琳: "Am I fighting a losing battle? Is goodness just... Overwhelmed by evil?"
+
+-> [乐观]"No. One light in darkness is enough."
+    <<set $rel_vautrin += 15>>
+    <<set $hope_restored = true>>
+    魏特琳: {眼中重现光芒} "You're right... Thank you..."
+    <<jump Vautrin_Talk_Humanity_Continue>>
+
+-> [现实]"I don't know. But we must try anyway."
+    <<set $rel_vautrin += 12>>
+    魏特琳: {点头} "Yes... We must try..."
+    <<jump Vautrin_Talk_Humanity_Continue>>
+
+<<else>>
+[关系不足，无法进行此对话]
+===
+
+title: Vautrin_Talk_Humanity_Continue
+tags: 深度对话, 魏特琳
+---
+魏特琳: "I've been thinking about this a lot..."
+
+魏特琳: "Maybe humans are both... Capable of great good and great evil..."
+
+魏特琳: "The question is... Which side do we choose to nurture?"
+
+魏特琳: {站起来，看向窗外} "These women and children here..."
+
+魏特琳: "They've seen the worst of humanity..."
+
+魏特琳: "But they've also seen kindness... Sacrifice... Love..."
+
+魏特琳: "People sharing their last piece of bread..."
+
+魏特琳: "Strangers protecting each other..."
+
+魏特琳: "Mothers dying to save their children..."
+
+魏特琳: {转身} "That's humanity too... Maybe that's the real humanity..."
+
+陈默: "您让我看到了人性最美好的一面。"
+
+魏特琳: {微笑} "And you help me remember why I do this..."
+
+<<set $humanity_discussion = true>>
+<<set $rel_vautrin += 15>>
+
+===
+
+title: Vautrin_Talk_Exhaustion
+tags: 深度对话, 魏特琳, 疲惫
+---
+<<if $rel_vautrin >= 70>>
+
+[场景：魏特琳靠在椅子上，罕见地显露疲态]
+
+陈默: {担心} "Miss Vautrin, you need to rest."
+
+魏特琳: {苦笑} "Rest? How can I rest?"
+
+魏特琳: "There are 10,000 people here depending on me..."
+
+魏特琳: "Every day, more come... Every day, more problems..."
+
+魏特琳: "Food shortages, disease outbreaks, conflicts..."
+
+魏特琳: {揉着太阳穴} "And the Japanese soldiers... They come every day..."
+
+魏特琳: "Demanding to search for soldiers... Demanding to take women..."
+
+魏特琳: "I have to stand at the gate... Argue with them... Threaten them..."
+
+魏特琳: {颤抖} "I'm so tired, Mr. Chen... So, so tired..."
+
+陈默: "Let me help you. You can't do everything alone."
+
+魏特琳: {摇头} "You're already helping... Everyone is helping..."
+
+魏特琳: "But it's not enough... It's never enough..."
+
+魏特琳: {眼泪滑落} "Last night, I dreamed I was drowning..."
+
+魏特琳: "Drowning in a sea of people... All reaching for me... Calling my name..."
+
+魏特琳: "And I couldn't save them all... I couldn't..."
+
+-> [安慰]{抱住她} "You're doing more than anyone could ask."
+    <<set $rel_vautrin += 20>>
+    <<set $emotional_support = true>>
+    魏特琳: {靠在陈默肩上，哭泣} "Thank you... Thank you..."
+    <<jump Vautrin_Talk_Exhaustion_End>>
+
+-> [现实]"You need to take care of yourself too."
+    <<set $rel_vautrin += 15>>
+    魏特琳: {擦泪} "I know... I'll try..."
+    <<jump Vautrin_Talk_Exhaustion_End>>
+
+<<else>>
+[关系不足，无法进行此对话]
+===
+
+title: Vautrin_Talk_Exhaustion_End
+tags: 深度对话, 魏特琳
+---
+魏特琳: {渐渐平静} "I'm sorry... I shouldn't break down like this..."
+
+陈默: "You're human. You're allowed to feel."
+
+魏特琳: "But they need me to be strong..."
+
+陈默: "Being strong doesn't mean never breaking. It means getting back up."
+
+魏特琳: {看着陈默，微笑} "You're wise, Mr. Chen... Thank you..."
+
+魏特琳: {深吸一口气} "Alright... I'll rest for an hour... Then back to work..."
+
+陈默（内心）: {痛苦} 她不知道……她最终会崩溃……会在1941年……
+
+陈默（内心）: 我该告诉她吗……还是让她继续燃烧自己……
+
+<<set $vautrin_exhaustion_witnessed = true>>
+<<set $rel_vautrin = 95>>
+
+===

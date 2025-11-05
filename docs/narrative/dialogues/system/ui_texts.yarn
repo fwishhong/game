@@ -1,0 +1,363 @@
+title: UI_Resource_Food_Gain
+tags: UI, 资源, 食物
+---
+系统: 获得食物 ×{$amount}
+===
+
+title: UI_Resource_Food_Loss
+tags: UI, 资源, 食物
+---
+系统: 消耗食物 ×{$amount}
+===
+
+title: UI_Resource_Food_Low
+tags: UI, 资源, 警告
+---
+系统: {警告} 食物储备不足！剩余：{$amount}份
+===
+
+title: UI_Resource_Water_Gain
+tags: UI, 资源, 水
+---
+系统: 获得饮用水 ×{$amount}
+===
+
+title: UI_Resource_Water_Loss
+tags: UI, 资源, 水
+---
+系统: 消耗饮用水 ×{$amount}
+===
+
+title: UI_Resource_Water_Critical
+tags: UI, 资源, 警告
+---
+系统: {紧急} 饮用水即将耗尽！剩余：{$amount}份
+===
+
+title: UI_Resource_Medicine_Gain
+tags: UI, 资源, 药品
+---
+系统: 获得药品 ×{$amount}
+===
+
+title: UI_Resource_Medicine_Use
+tags: UI, 资源, 药品
+---
+系统: 使用药品治疗{$character}
+===
+
+title: UI_Resource_Fuel_Gain
+tags: UI, 资源, 燃料
+---
+系统: 获得燃料 ×{$amount}
+===
+
+title: UI_Resource_Fuel_Low
+tags: UI, 资源, 警告
+---
+系统: {警告} 燃料不足！今晚会很冷……
+===
+
+title: UI_Relationship_Increase
+tags: UI, 关系, 提升
+---
+系统: {$character}对你的好感度提升了（+{$amount}）
+===
+
+title: UI_Relationship_Decrease
+tags: UI, 关系, 下降
+---
+系统: {$character}对你的好感度下降了（-{$amount}）
+===
+
+title: UI_Relationship_Level_Up
+tags: UI, 关系, 等级
+---
+系统: {温暖} 你与{$character}的关系提升为：{$level}
+===
+
+title: UI_Relationship_Stranger
+tags: UI, 关系, 等级
+---
+陌生人
+===
+
+title: UI_Relationship_Acquaintance
+tags: UI, 关系, 等级
+---
+熟人
+===
+
+title: UI_Relationship_Friend
+tags: UI, 关系, 等级
+---
+朋友
+===
+
+title: UI_Relationship_Close_Friend
+tags: UI, 关系, 等级
+---
+挚友
+===
+
+title: UI_Relationship_Family
+tags: UI, 关系, 等级
+---
+如同家人
+===
+
+title: UI_Achievement_Unlock
+tags: UI, 成就
+---
+系统: {庆祝} 成就解锁：{$achievement_name}
+系统: {$achievement_description}
+===
+
+title: UI_Achievement_Progress
+tags: UI, 成就
+---
+系统: 成就进度：{$achievement_name} ({$current}/{$total})
+===
+
+title: UI_Chapter_Start
+tags: UI, 章节
+---
+系统: {庄重} 第{$chapter_number}章
+系统: {$chapter_title}
+系统: {$date}
+===
+
+title: UI_Chapter_Complete
+tags: UI, 章节
+---
+系统: 第{$chapter_number}章结束
+系统: {$summary}
+===
+
+title: UI_Prologue_Start
+tags: UI, 章节
+---
+系统: {肃穆} 序章
+系统: 2024年12月13日
+系统: 第87个国家公祭日
+===
+
+title: UI_Epilogue_Start
+tags: UI, 章节
+---
+系统: {深沉} 终章
+系统: 2025年
+系统: 回到现代
+===
+
+title: UI_Save_Success
+tags: UI, 存档
+---
+系统: 游戏已保存
+===
+
+title: UI_Save_Failed
+tags: UI, 存档
+---
+系统: {错误} 保存失败，请重试
+===
+
+title: UI_Load_Success
+tags: UI, 存档
+---
+系统: 读取存档成功
+===
+
+title: UI_Load_Failed
+tags: UI, 存档
+---
+系统: {错误} 读取存档失败
+===
+
+title: UI_Autosave
+tags: UI, 存档
+---
+系统: {提示} 自动保存中……
+===
+
+title: UI_Day_Start
+tags: UI, 时间
+---
+系统: {$date}
+系统: 天气：{$weather}
+===
+
+title: UI_Day_End
+tags: UI, 时间
+---
+系统: 夜幕降临
+系统: 今天发生了很多事……是时候写日记了
+===
+
+title: UI_Health_Critical
+tags: UI, 状态, 警告
+---
+系统: {紧急} {$character}的健康状况危急！
+===
+
+title: UI_Health_Death
+tags: UI, 状态, 死亡
+---
+系统: {哀伤} {$character}……去世了。
+===
+
+title: UI_Health_Recovered
+tags: UI, 状态
+---
+系统: {欣慰} {$character}康复了。
+===
+
+title: UI_Hunger_High
+tags: UI, 状态, 警告
+---
+系统: {警告} {$character}已经很久没有吃饭了……
+===
+
+title: UI_Morale_Low
+tags: UI, 状态, 警告
+---
+系统: {沉重} 众人的士气很低落……
+===
+
+title: UI_Morale_High
+tags: UI, 状态
+---
+系统: {欣慰} 今天大家的精神状态不错。
+===
+
+title: UI_Quest_New
+tags: UI, 任务
+---
+系统: 新任务：{$quest_name}
+===
+
+title: UI_Quest_Complete
+tags: UI, 任务
+---
+系统: 任务完成：{$quest_name}
+===
+
+title: UI_Quest_Failed
+tags: UI, 任务
+---
+系统: 任务失败：{$quest_name}
+===
+
+title: UI_Skill_Unlock
+tags: UI, 技能
+---
+系统: 解锁技能：{$skill_name}
+===
+
+title: UI_Skill_LevelUp
+tags: UI, 技能
+---
+系统: 技能提升：{$skill_name} Lv.{$level}
+===
+
+title: UI_Danger_Near
+tags: UI, 警告
+---
+系统: {警告} 附近有危险！
+===
+
+title: UI_Danger_Passed
+tags: UI, 提示
+---
+系统: 危险已过……暂时安全了。
+===
+
+title: UI_Time_Limited
+tags: UI, 警告
+---
+系统: {紧急} 时间有限！剩余：{$time}秒
+===
+
+title: UI_Choice_Locked
+tags: UI, 提示
+---
+系统: {提示} 此选项需要：{$requirement}
+===
+
+title: UI_Inventory_Full
+tags: UI, 提示
+---
+系统: 背包已满，无法拾取更多物品。
+===
+
+title: UI_Item_Use
+tags: UI, 物品
+---
+系统: 使用了{$item_name}
+===
+
+title: UI_Historical_Note
+tags: UI, 历史
+---
+系统: {提示} 按H键查看历史资料
+===
+
+title: UI_Diary_Reminder
+tags: UI, 日记
+---
+系统: {提醒} 别忘了写今天的日记。
+===
+
+title: UI_Weather_Cold
+tags: UI, 天气
+---
+寒冷，需要燃料保暖
+===
+
+title: UI_Weather_Rain
+tags: UI, 天气
+---
+阴雨，外出不便
+===
+
+title: UI_Weather_Snow
+tags: UI, 天气
+---
+下雪，极度寒冷
+===
+
+title: UI_Weather_Clear
+tags: UI, 天气
+---
+阴天，相对平静
+===
+
+title: UI_Tutorial_Prompt
+tags: UI, 教程
+---
+系统: {提示} 按F1可以查看帮助
+===
+
+title: UI_Pause
+tags: UI, 系统
+---
+游戏已暂停
+===
+
+title: UI_Options_Saved
+tags: UI, 系统
+---
+设置已保存
+===
+
+title: UI_Confirm_Exit
+tags: UI, 系统
+---
+系统: 确定要退出游戏吗？未保存的进度将丢失。
+===
+
+title: UI_Loading
+tags: UI, 系统
+---
+读取中……
+===

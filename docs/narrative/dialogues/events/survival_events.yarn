@@ -1,0 +1,598 @@
+title: JapanesePatrol_01
+tags: 生存事件, 日军巡逻, 高频
+---
+<<set $event_type = "japanese_patrol">>
+<<set $threat_level = "moderate">>
+
+旁白: {紧张} 窗外传来整齐的脚步声……日本巡逻队正在经过……
+
+王秀英: {小声} 别出声……千万别出声……
+
+小孩: {害怕} 呜……
+
+母亲: {急} 嘘——
+
+-> 捂住孩子的嘴
+    <<set $choice = "silence_child">>
+    陈默: {紧急手势} 快！
+    旁白: {描述} 母亲轻轻捂住孩子的嘴……
+    <<if $stealth_skill >= 3>>
+        旁白: {松口气} 巡逻队走过去了……
+        <<set $danger_level -= 5>>
+    <<else>>
+        旁白: {糟糕} 孩子挣扎着发出声音……
+        <<jump JapanesePatrol_01_Discovered>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+
+-> 制造其他声音掩盖
+    <<set $choice = "cover_noise">>
+    陈默: {迅速} 快，假装咳嗽！
+    旁白: {描述} 陈默故意发出咳嗽声……
+    <<if $deception_skill >= 4>>
+        日本士兵: {远处} "有人生病了。"
+        旁白: {安全} 巡逻队没有起疑……
+        <<set $deception_skill += 1>>
+    <<else>>
+        日本士兵: {起疑} "什么声音？进去看看！"
+        <<jump JapanesePatrol_01_Discovered>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+
+-> 躲到隐蔽处
+    <<set $choice = "hide">>
+    陈默: {手势} 所有人，躲到后面！
+    旁白: {紧张} 众人迅速躲进事先准备好的隐蔽处……
+    <<if $preparation_level >= 5>>
+        旁白: {安全} 因为提前准备，躲藏位置很安全……
+        <<set $stealth_skill += 1>>
+    <<else>>
+        旁白: {危险} 隐蔽处不够隐蔽……
+        <<jump JapanesePatrol_01_Discovered>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+===
+
+title: JapanesePatrol_01_Discovered
+tags: 生存事件, 被发现
+---
+日本士兵: {凶狠} "开门！开门！"
+
+旁白: {危急} 日本士兵踹开了门……
+
+-> 假装这里是医院
+    <<set $choice = "pretend_hospital">>
+    陈默: {急智} 这里是伤寒病人隔离区！
+    日本士兵: {警觉} "伤寒？"
+    <<if $deception_skill >= 5 && $medical_knowledge >= 4>>
+        陈默: {装咳} 咳咳……我们都被传染了……
+        日本士兵: {退后} "八嘎！走！"
+        旁白: {侥幸} 士兵害怕传染，匆忙离开……
+        <<set $deception_skill += 2>>
+    <<else>>
+        日本士兵: {不信} "骗人！搜查！"
+        <<jump JapanesePatrol_01_Search>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+
+-> 出示德国保护文件
+    <<if $has_german_pass>>
+        <<set $choice = "show_papers">>
+        陈默: {镇定} 这里受德国保护。
+        日本士兵: {查看文件} "哼！"
+        旁白: {松口气} 士兵不情愿地离开了……
+        <<set $danger_level -= 5>>
+    <<else>>
+        <<set $choice = "no_papers">>
+        陈默: {慌乱} 我们有保护文件……在……在哪儿？
+        日本士兵: {怒} "骗人！"
+        <<jump JapanesePatrol_01_Search>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+
+-> 贿赂士兵
+    <<set $choice = "bribe">>
+    陈默: {小心翼翼} 长官，我们有些……礼物……
+    <<if $valuables >= 20>>
+        陈默: {递出} 一点心意……
+        日本士兵: {接过} "嗯……走吧。"
+        <<set $valuables -= 20>>
+        <<set $danger_level -= 5>>
+    <<else>>
+        日本士兵: {怒} "侮辱我？！"
+        <<jump JapanesePatrol_01_Search>>
+    <<endif>>
+    <<jump JapanesePatrol_01_End>>
+===
+
+title: JapanesePatrol_01_Search
+tags: 生存事件, 搜查
+---
+旁白: {沉重} 日本士兵开始搜查避难所……
+
+日本士兵: {搜查} "所有人，站出来！"
+
+<<set $supplies_lost = 30>>
+<<set $valuables_lost = 15>>
+<<set $morale -= 20>>
+
+<<if $hidden_supplies >= 50>>
+    旁白: {描述} 虽然被搜走了一些东西，但大部分物资提前藏好了……
+    <<set $supplies_lost = 10>>
+<<endif>>
+
+日本士兵: {威胁} "下次看到可疑的，直接枪毙！"
+
+旁白: {压抑} 士兵带走了食物和值钱的东西……
+
+<<jump JapanesePatrol_01_End>>
+===
+
+title: JapanesePatrol_01_End
+tags: 生存事件, 结束
+---
+<<set $event_japanese_patrol_01 = true>>
+<<set $japanese_encounter_count += 1>>
+===
+
+title: JapanesePatrol_02
+tags: 生存事件, 日军巡逻, 抓人
+---
+<<set $event_type = "japanese_patrol">>
+<<set $threat_level = "high">>
+
+日本军官: "今天要征召十个人修工事！"
+
+旁白: {恐慌} 人群骚动起来……被抓去的人很少能活着回来……
+
+-> 躲在人群后面
+    <<set $choice = "hide_in_crowd">>
+    陈默: {小声} 往后退……
+    <<if $stealth_skill >= 5>>
+        旁白: {成功} 陈默成功混在人群中……
+        <<set $danger_level -= 5>>
+    <<else>>
+        日本士兵: {指} "你！出来！"
+        <<jump JapanesePatrol_02_Caught>>
+    <<endif>>
+    <<jump JapanesePatrol_02_End>>
+
+-> 假装生病
+    <<set $choice = "pretend_sick">>
+    陈默: {倒地} 咳咳……我……我得了肺病……
+    日本士兵: {嫌弃} "没用的东西！"
+    <<if $acting_skill >= 4>>
+        旁白: {成功} 士兵嫌弃地走开了……
+        <<set $acting_skill += 1>>
+    <<else>>
+        日本士兵: {踢} "装病？！"
+        <<set $health -= 10>>
+        <<jump JapanesePatrol_02_Caught>>
+    <<endif>>
+    <<jump JapanesePatrol_02_End>>
+
+-> 主动站出来保护其他人
+    <<set $choice = "volunteer">>
+    陈默: {站出来} 我去！
+    王秀英: {急} 陈默——！
+    <<if $reputation >= 50>>
+        难民: {站出来} 我们也去！不能让陈先生一个人！
+        旁白: {感动} 因为陈默的威望，大家愿意一起分担……
+        <<set $morale += 20>>
+        <<set $community_bond += 15>>
+    <<else>>
+        旁白: {沉默} 没有人站出来……陈默孤身被带走……
+        <<jump JapanesePatrol_02_Caught>>
+    <<endif>>
+    <<jump JapanesePatrol_02_End>>
+===
+
+title: JapanesePatrol_02_Caught
+tags: 生存事件, 被抓
+---
+旁白: {沉重} 陈默被日本士兵抓住了……
+
+日本士兵: "走！"
+
+<<if $has_german_pass>>
+    陈默: {急} 等等！我有德国保护证！
+    日本军官: {查看} "嗯……放了。"
+    旁白: {松口气} 德国文件保了陈默一命……
+    <<set $danger_level -= 5>>
+<<elseif $bribe_possible>>
+    陈默: {低声} 长官……我有东西……
+    日本军官: {贪婪} "拿来！"
+    <<set $valuables -= 30>>
+    旁白: {侥幸} 陈默用贵重物品换回了自由……
+<<else>>
+    旁白: {绝望} 陈默被带去修工事……
+    <<set $health -= 30>>
+    <<set $morale -= 25>>
+    旁白: {痛苦} 三天后，陈默遍体鳞伤地逃了回来……
+    <<set $survival_skill += 2>>
+<<endif>>
+
+<<jump JapanesePatrol_02_End>>
+===
+
+title: JapanesePatrol_02_End
+tags: 生存事件, 结束
+---
+<<set $event_japanese_patrol_02 = true>>
+===
+
+title: ScavengingMission_01
+tags: 生存事件, 搜寻物资, 中频
+---
+<<set $event_type = "scavenging">>
+
+王秀英: {担忧} 粮食快见底了，必须出去找东西……
+
+陈默: {观察} 外面的巡逻队三小时换一次班，空档期有十分钟……
+
+-> 等巡逻队换班时行动
+    <<set $choice = "wait_for_gap">>
+    陈默: {谨慎} 等巡逻队换班，我们趁机出去。
+    <<if $stealth_skill >= 4>>
+        旁白: {成功} 陈默掌握了巡逻规律，成功溜出去……
+        <<jump ScavengingMission_01_Search>>
+    <<else>>
+        旁白: {失败} 时机把握不准，差点被发现……
+        <<set $danger_level += 10>>
+        <<jump ScavengingMission_01_End>>
+    <<endif>>
+
+-> 走下水道
+    <<set $choice = "use_sewer">>
+    陈默: {决定} 走下水道，虽然脏但安全。
+    旁白: {描述} 陈默爬进了恶臭的下水道……
+    <<set $health -= 5>>
+    <<jump ScavengingMission_01_Search>>
+
+-> 夜间行动
+    <<set $choice = "night_action">>
+    陈默: {等待} 等天黑了再说。
+    旁白: {描述} 夜幕降临，陈默悄悄溜出避难所……
+    <<if $stealth_skill >= 3>>
+        旁白: {安全} 夜色掩护下，陈默行动自如……
+        <<jump ScavengingMission_01_Search>>
+    <<else>>
+        旁白: {危险} 黑暗中看不清路，发出了声响……
+        <<set $danger_level += 15>>
+        <<jump ScavengingMission_01_End>>
+    <<endif>>
+
+-> 假扮日本人允许的商人
+    <<set $choice = "disguise">>
+    陈默: {准备} 我换上商人的衣服，装作送货的……
+    <<if $disguise_skill >= 5 && $japanese_knowledge >= 3>>
+        旁白: {成功} 陈默的伪装天衣无缝……
+        <<jump ScavengingMission_01_Search>>
+    <<else>>
+        日本士兵: {怀疑} "你的，良民证？"
+        <<set $danger_level += 20>>
+        <<jump ScavengingMission_01_End>>
+    <<endif>>
+===
+
+title: ScavengingMission_01_Search
+tags: 生存事件, 搜寻中
+---
+旁白: {描述} 陈默在废墟中小心搜寻……
+
+-> 搜查商铺废墟
+    <<set $search_location = "shop">>
+    陈默: {搜索} 商铺里可能还有存货……
+    <<if $luck >= 5>>
+        旁白: {发现} 在倒塌的货架下，找到了罐头和布匹！
+        <<set $food_supply += 40>>
+        <<set $supplies += 30>>
+        <<set $morale += 15>>
+    <<else>>
+        旁白: {失望} 已经被搜刮干净了……
+        <<set $morale -= 5>>
+    <<endif>>
+    <<jump ScavengingMission_01_Return>>
+
+-> 检查民居
+    <<set $search_location = "house">>
+    陈默: {轻声} 看看居民家里有没有剩余的粮食……
+    <<if $luck >= 3>>
+        旁白: {发现} 在地窖里找到了一袋米和一些咸菜！
+        <<set $food_supply += 25>>
+        <<set $morale += 10>>
+    <<else>>
+        旁白: {沉重} 屋里一片狼藉，到处是血迹……什么都没有……
+        <<set $morale -= 10>>
+        <<set $mental_state -= 5>>
+    <<endif>>
+    <<jump ScavengingMission_01_Return>>
+
+-> 去废弃的仓库
+    <<set $search_location = "warehouse">>
+    陈默: {冒险} 仓库离日本人军营很近，但收获肯定大……
+    <<if $luck >= 7 && $stealth_skill >= 5>>
+        旁白: {大成功} 仓库里堆满了物资！
+        <<set $food_supply += 100>>
+        <<set $medicine_supply += 30>>
+        <<set $supplies += 50>>
+        <<set $morale += 30>>
+    <<else>>
+        旁白: {发现} 糟糕！仓库有守卫！
+        <<jump ScavengingMission_01_Danger>>
+    <<endif>>
+    <<jump ScavengingMission_01_Return>>
+===
+
+title: ScavengingMission_01_Danger
+tags: 生存事件, 遇险
+---
+日本士兵: "什么人？！"
+
+-> 立刻逃跑
+    <<set $choice = "flee">>
+    陈默: {急} 快跑！
+    <<if $agility >= 5>>
+        旁白: {逃脱} 陈默身手敏捷，甩开了追兵……
+        <<set $agility += 1>>
+    <<else>>
+        旁白: {受伤} 一颗子弹擦过陈默的手臂……
+        <<set $health -= 15>>
+        <<set $danger_level += 10>>
+    <<endif>>
+    <<jump ScavengingMission_01_Return>>
+
+-> 躲起来
+    <<set $choice = "hide">>
+    陈默: {屏息} 藏进货箱后面……
+    <<if $stealth_skill >= 6>>
+        旁白: {成功} 士兵搜查了一圈，没有发现……
+        <<set $stealth_skill += 1>>
+        旁白: {惊喜} 等士兵离开后，陈默快速拿了些物资……
+        <<set $food_supply += 30>>
+    <<else>>
+        日本士兵: {发现} "在这里！"
+        <<set $danger_level += 20>>
+        <<set $health -= 20>>
+    <<endif>>
+    <<jump ScavengingMission_01_Return>>
+===
+
+title: ScavengingMission_01_Return
+tags: 生存事件, 返回
+---
+旁白: {描述} 陈默踏上返回避难所的路……
+
+<<if $danger_level >= 20>>
+    旁白: {紧张} 身后传来追击的声音……
+    <<if $stamina >= 5>>
+        旁白: {逃脱} 陈默一口气跑回了避难所……
+        <<set $stamina -= 20>>
+    <<else>>
+        旁白: {危险} 陈默体力不支，差点被抓住……
+        <<set $health -= 10>>
+    <<endif>>
+<<endif>>
+
+王秀英: {担心} 陈默！你回来了！
+
+<<if $food_supply_gained >= 30>>
+    王秀英: {欣喜} 太好了！有这些我们能撑过去！
+    <<set $morale += 15>>
+<<else>>
+    王秀英: {失望} 收获这么少……
+    <<set $morale -= 5>>
+<<endif>>
+
+<<jump ScavengingMission_01_End>>
+===
+
+title: ScavengingMission_01_End
+tags: 生存事件, 结束
+---
+<<set $event_scavenging_mission_01 = true>>
+<<set $scavenging_count += 1>>
+===
+
+title: FireAccident_01
+tags: 生存事件, 火灾, 低频
+---
+<<set $event_type = "fire">>
+
+难民: {惊叫} 着火了！着火了！
+
+旁白: {紧急} 取暖的火盆打翻，火势迅速蔓延……
+
+-> 先救人
+    <<set $choice = "save_people">>
+    陈默: {果断} 先把人救出来！
+    旁白: {紧张} 陈默冲进火场，救出了几个被困的人……
+    <<if $courage >= 5>>
+        旁白: {成功} 所有人都被救了出来！
+        <<set $people_saved += 5>>
+        <<set $morale += 25>>
+        <<set $reputation += 15>>
+    <<else>>
+        旁白: {遗憾} 来不及救出所有人……
+        <<set $people_saved += 2>>
+        <<set $people_lost += 1>>
+        <<set $morale -= 10>>
+        <<set $guilt += 20>>
+    <<endif>>
+    <<set $supplies_lost = 40>>
+    <<jump FireAccident_01_End>>
+
+-> 先抢救物资
+    <<set $choice = "save_supplies">>
+    陈默: {急} 快！把粮食搬出来！
+    <<set $supplies_saved = 30>>
+    旁白: {沉重} 但有两个孩子来不及逃出……
+    <<set $people_lost += 2>>
+    <<set $morale -= 30>>
+    <<set $guilt += 40>>
+    <<jump FireAccident_01_End>>
+
+-> 先灭火
+    <<set $choice = "extinguish">>
+    陈默: {指挥} 打水！灭火！
+    <<if $leadership >= 6>>
+        旁白: {成功} 在陈默的指挥下，火势被迅速控制……
+        <<set $people_lost = 0>>
+        <<set $supplies_lost = 10>>
+        <<set $morale += 15>>
+        <<set $leadership += 1>>
+    <<else>>
+        旁白: {混乱} 指挥不当，火势越来越大……
+        <<set $people_lost += 1>>
+        <<set $supplies_lost = 35>>
+        <<set $morale -= 20>>
+    <<endif>>
+    <<jump FireAccident_01_End>>
+===
+
+title: FireAccident_01_End
+tags: 生存事件, 结束
+---
+旁白: {沉重} 火灾过后，避难所一片狼藉……
+
+<<if $people_lost >= 1>>
+    陈默（旁白）: {痛苦} 又有人死了……都怪我……
+    <<set $mental_state -= 15>>
+<<endif>>
+
+<<set $event_fire_accident_01 = true>>
+===
+
+title: IllnessOutbreak_01
+tags: 生存事件, 疾病爆发, 中频
+---
+<<set $event_type = "illness">>
+
+王秀英: {担忧} 陈默，已经有五个人发烧了……
+
+陈默: {严肃} 症状是什么？
+
+王秀英: {害怕} 高烧、腹泻……会不会是……传染病？
+
+-> 立即隔离病人
+    <<set $choice = "quarantine">>
+    陈默: {果断} 马上隔离！不能让疾病扩散！
+    旁白: {描述} 病人被转移到单独的房间……
+    <<if $medical_knowledge >= 5>>
+        旁白: {控制} 及时隔离控制住了疫情……
+        <<set $illness_spread = "contained">>
+        <<set $morale += 10>>
+    <<else>>
+        旁白: {恶化} 但已经有其他人被传染了……
+        <<set $illness_spread = "spreading">>
+        <<set $sick_count += 3>>
+    <<endif>>
+    <<jump IllnessOutbreak_01_Treatment>>
+
+-> 煮热水消毒
+    <<set $choice = "boil_water">>
+    陈默: {指示} 煮开水，所有人喝煮过的水！
+    旁白: {描述} 众人开始煮水消毒……
+    <<set $illness_spread = "slow">>
+    <<set $fuel_supply -= 10>>
+    <<jump IllnessOutbreak_01_Treatment>>
+
+-> 寻求拉贝先生帮助
+    <<set $choice = "seek_help">>
+    陈默: {决定} 我去找拉贝先生，他那里有药品。
+    <<if $relationship_rabe >= 5>>
+        拉贝: {援助} 给你们一些药品和消毒剂。
+        <<set $medicine_supply += 30>>
+        <<set $illness_spread = "contained">>
+        <<set $morale += 15>>
+    <<else>>
+        拉贝: {为难} 抱歉，我们的药品也很有限……
+        <<set $medicine_supply += 5>>
+        <<set $morale -= 10>>
+    <<endif>>
+    <<jump IllnessOutbreak_01_Treatment>>
+===
+
+title: IllnessOutbreak_01_Treatment
+tags: 生存事件, 治疗
+---
+旁白: {描述} 接下来的几天，病情的发展取决于治疗措施……
+
+<<if $illness_spread == "contained">>
+    旁白: {欣慰} 疫情得到控制，病人逐渐康复……
+    <<set $morale += 20>>
+    <<set $medical_skill += 2>>
+<<elseif $illness_spread == "slow">>
+    旁白: {紧张} 疫情蔓延速度减缓，但仍有新的病例……
+    <<set $sick_count += 2>>
+    <<set $morale -= 10>>
+<<else>>
+    旁白: {严重} 疫情失控，越来越多人生病……
+    <<set $sick_count += 8>>
+    <<set $morale -= 25>>
+    <<set $people_lost += 2>>
+<<endif>>
+
+<<jump IllnessOutbreak_01_End>>
+===
+
+title: IllnessOutbreak_01_End
+tags: 生存事件, 结束
+---
+<<set $event_illness_outbreak_01 = true>>
+===
+
+title: IllnessOutbreak_02
+tags: 生存事件, 疾病爆发, 精神疾病
+---
+<<set $event_type = "mental_illness">>
+
+旁白: {沉重} 持续的恐惧和压力，让一些人的精神出现了问题……
+
+难民甲: {崩溃} 我受不了了！我要出去！我要离开这里！
+
+难民乙: {疯狂} 他们都要死了……我们都要死了……哈哈哈……
+
+-> 安抚他们
+    <<set $choice = "comfort">>
+    陈默: {温和} 冷静……深呼吸……我们在一起……
+    <<if $empathy >= 5>>
+        旁白: {缓解} 在陈默的安抚下，情绪渐渐稳定……
+        <<set $morale += 10>>
+        <<set $mental_state += 5>>
+    <<else>>
+        难民: {推开} 别碰我！你们都是骗子！
+        <<set $morale -= 15>>
+    <<endif>>
+    <<jump IllnessOutbreak_02_End>>
+
+-> 组织集体活动转移注意力
+    <<set $choice = "group_activity">>
+    陈默: {提议} 大家一起唱歌吧，唱家乡的歌……
+    旁白: {温暖} 歌声在避难所回荡，驱散了一些阴霾……
+    <<set $morale += 15>>
+    <<set $community_bond += 10>>
+    <<jump IllnessOutbreak_02_End>>
+
+-> 让他们发泄情绪
+    <<set $choice = "let_vent">>
+    陈默: {理解} 哭吧……喊吧……都释放出来……
+    旁白: {描述} 压抑许久的情绪爆发出来……
+    <<set $morale += 5>>
+    <<set $mental_state += 10>>
+    <<jump IllnessOutbreak_02_End>>
+
+-> 给他们安排任务
+    <<set $choice = "assign_tasks">>
+    陈默: {指派} 来，帮我整理这些物资，数一数还有多少……
+    旁白: {描述} 忙碌让人暂时忘记恐惧……
+    <<set $morale += 10>>
+    <<set $order += 5>>
+    <<jump IllnessOutbreak_02_End>>
+===
+
+title: IllnessOutbreak_02_End
+tags: 生存事件, 结束
+---
+<<set $event_illness_outbreak_02 = true>>
+===

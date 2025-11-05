@@ -1,0 +1,328 @@
+title: Diary_Prompt_Daily_Intro
+tags: 日记, 提示, 开场
+---
+系统: {温和} 又是漫长的一天……
+
+系统: 今天发生了很多事。你想在日记中重点记录什么？
+
+→ 记录某个人的故事
+→ 记录今天的历史事件
+→ 记录自己的感受与思考
+===
+
+title: Diary_Prompt_Focus_Person
+tags: 日记, 提示, 人物
+---
+系统: 今天你想重点记录谁的故事？
+
+→ {$person_1}
+→ {$person_2}
+→ {$person_3}
+→ 所有人的点滴
+===
+
+title: Diary_Prompt_Focus_Event
+tags: 日记, 提示, 事件
+---
+系统: 今天发生的哪件事最值得记录？
+
+→ {$event_1}
+→ {$event_2}
+→ {$event_3}
+→ 整体概况
+===
+
+title: Diary_Prompt_Focus_Feeling
+tags: 日记, 提示, 感受
+---
+系统: 此刻，你的心情是……
+
+→ 悲伤与无力
+→ 愤怒与不甘
+→ 希望与坚持
+→ 复杂难言
+===
+
+title: Diary_Prompt_Person_Wang
+tags: 日记, 人物, 王掌柜
+---
+系统: 关于王掌柜，你想记录：
+
+→ 他今天的遭遇
+→ 他对我说的话
+→ 我对他的感受
+→ 他的家人
+===
+
+title: Diary_Prompt_Person_Mei
+tags: 日记, 人物, 小梅
+---
+系统: 关于小梅，你想记录：
+
+→ 她今天的状态
+→ 她和李文斌的故事
+→ 我对她的关心
+→ 她眼中的希望
+===
+
+title: Diary_Prompt_Person_Li
+tags: 日记, 人物, 李文斌
+---
+系统: 关于李文斌，你想记录：
+
+→ 他作为前军人的经历
+→ 他对小梅的爱
+→ 他的勇气与隐忍
+→ 我与他的对话
+===
+
+title: Diary_Prompt_Person_Vautrin
+tags: 日记, 人物, 魏特琳
+---
+系统: 关于魏特琳女士，你想记录：
+
+→ 她拯救的人们
+→ 她的疲惫与坚持
+→ 她对我说的话
+→ 我对她的敬佩
+===
+
+title: Diary_Prompt_Person_Takahashi
+tags: 日记, 人物, 高桥
+---
+系统: 关于高桥，你想记录：
+
+→ 他的矛盾处境
+→ 我对他的复杂感受
+→ 他今天的举动
+→ 人性的思考
+===
+
+title: Diary_Prompt_Emotion_Sadness
+tags: 日记, 情感, 悲伤
+---
+系统: 你想如何表达这份悲伤？
+
+→ 描述今天的痛苦画面
+→ 抒发内心的无力感
+→ 为逝去的人哀悼
+→ 质问命运的不公
+===
+
+title: Diary_Prompt_Emotion_Anger
+tags: 日记, 情感, 愤怒
+---
+系统: 你想如何表达这份愤怒？
+
+→ 控诉侵略者的罪行
+→ 批判人性的黑暗
+→ 愤慨自己的无能
+→ 呐喊对正义的渴望
+===
+
+title: Diary_Prompt_Emotion_Hope
+tags: 日记, 情感, 希望
+---
+系统: 即使在黑暗中，你看到了什么希望？
+
+→ 人们相互扶持
+→ 某个人的坚强
+→ 善良依然存在
+→ 对未来的信念
+===
+
+title: Diary_Prompt_Emotion_Complex
+tags: 日记, 情感, 复杂
+---
+系统: 这份复杂的心情，源自于……
+
+→ 对敌人中好人的困惑
+→ 对道德抉择的挣扎
+→ 对历史与个人的思考
+→ 说不清的万千思绪
+===
+
+title: Diary_Prompt_Historical_Battle
+tags: 日记, 历史, 战事
+---
+系统: 关于今天的战事，你想记录：
+
+→ 详细的时间地点
+→ 造成的伤亡情况
+→ 人们的反应
+→ 历史的见证
+===
+
+title: Diary_Prompt_Historical_Rescue
+tags: 日记, 历史, 救援
+---
+系统: 关于救援行动，你想记录：
+
+→ 国际友人的善举
+→ 被救者的感激
+→ 救援的细节经过
+→ 人道主义的光辉
+===
+
+title: Diary_Prompt_Historical_Atrocity
+tags: 日记, 历史, 暴行
+---
+系统: {沉重} 关于今天目睹的暴行，你想记录：
+
+→ 完整的事件经过
+→ 受害者的遭遇
+→ 作为见证者的责任
+→ 愤怒与哀痛
+===
+
+title: Diary_Prompt_Reflection_Survival
+tags: 日记, 反思, 生存
+---
+系统: 关于生存，你今天的思考是：
+
+→ 活着的意义
+→ 生存的代价
+→ 道德与生存的冲突
+→ 谁该活下来
+===
+
+title: Diary_Prompt_Reflection_Humanity
+tags: 日记, 反思, 人性
+---
+系统: 关于人性，你今天的思考是：
+
+→ 善恶的界限
+→ 战争中的人性
+→ 良知与职责
+→ 人性的复杂
+===
+
+title: Diary_Prompt_Reflection_History
+tags: 日记, 反思, 历史
+---
+系统: 作为见证者，你想思考：
+
+→ 历史的真相
+→ 记录的意义
+→ 遗忘与铭记
+→ 我的责任
+===
+
+title: Diary_Prompt_Reflection_Time
+tags: 日记, 反思, 时间
+---
+系统: 关于穿越与时间，你想思考：
+
+→ 能否改变历史
+→ 宿命与选择
+→ 回到现代的意义
+→ 时空的重量
+===
+
+title: Diary_Prompt_Detail_Food
+tags: 日记, 细节, 资源
+---
+系统: 关于今天的食物分配：
+
+→ 记录谁吃了什么
+→ 描述资源的匮乏
+→ 分配中的决策
+→ 人们的饥饿状态
+===
+
+title: Diary_Prompt_Detail_Weather
+tags: 日记, 细节, 天气
+---
+系统: 关于今天的天气：
+
+→ 详细的气候描述
+→ 寒冷带来的困境
+→ 天气与心情
+→ 环境的压迫感
+===
+
+title: Diary_Prompt_Detail_Place
+tags: 日记, 细节, 地点
+---
+系统: 关于今天去过的地方：
+
+→ 详细的地点描述
+→ 场所的历史意义
+→ 在那里发生的事
+→ 地点的氛围感受
+===
+
+title: Diary_Prompt_Summary_Day
+tags: 日记, 总结, 一天
+---
+系统: 今天的总结：
+
+→ 简要记录主要事件
+→ 重点突出关键时刻
+→ 描述整体氛围
+→ 为明天做准备
+===
+
+title: Diary_Prompt_Summary_Week
+tags: 日记, 总结, 一周
+---
+系统: {提示} 这一周发生了很多事……
+
+系统: 你想在周记中重点写什么？
+
+→ 这周最重要的事件
+→ 这周关系的变化
+→ 这周的生存状况
+→ 这周的心路历程
+===
+
+title: Diary_Prompt_Special_Death
+tags: 日记, 特殊, 死亡
+---
+系统: {哀伤} {$character}去世了……
+
+系统: 你想如何记录这个人？
+
+→ 回忆与ta的点滴
+→ 记录ta的生平
+→ 描述ta的最后时刻
+→ 表达我的悲痛
+===
+
+title: Diary_Prompt_Special_Rescue
+tags: 日记, 特殊, 救援
+---
+系统: {欣慰} 今天成功救了人！
+
+系统: 你想记录：
+
+→ 整个救援过程
+→ 被救者的感谢
+→ 我的决策与行动
+→ 救人的意义
+===
+
+title: Diary_Prompt_Special_Choice
+tags: 日记, 特殊, 抉择
+---
+系统: {沉重} 今天做了一个艰难的决定……
+
+系统: 你想记录：
+
+→ 决策的前因后果
+→ 内心的挣扎
+→ 选择的理由
+→ 对结果的反思
+===
+
+title: Diary_Prompt_Free_Write
+tags: 日记, 自由
+---
+系统: {温和} 或者，你可以自由书写……
+
+系统: 想写什么就写什么。
+
+系统: 这份日记，只属于你。
+
+→ 开始自由书写
+===

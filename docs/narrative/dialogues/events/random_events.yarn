@@ -1,0 +1,557 @@
+title: FoodShortage_01
+tags: 随机事件, 食物短缺, 低频
+---
+<<set $event_type = "food_shortage">>
+<<set $event_severity = "moderate">>
+
+旁白: {紧张} 安全区的粮食储备告急。今天的配给又减少了。
+
+王秀英: {担忧} 陈默，这些米面还够大家吃三天……之后就……
+
+-> 必须想办法去找更多食物
+    <<set $choice = "proactive">>
+    <<set $morale -= 5>>
+    陈默: {坚定} 我们不能坐以待毙，我去外面找找看。
+    王秀英: {担心} 外面很危险……
+    陈默: {安慰} 我会小心的。总比眼睁睁看着大家挨饿好。
+    <<if $japanese_patrol_level > 3>>
+        <<jump FoodShortage_01_Dangerous>>
+    <<else>>
+        <<jump FoodShortage_01_Success>>
+    <<endif>>
+
+-> 减少每个人的配给份额
+    <<set $choice = "rationing">>
+    <<set $morale -= 10>>
+    <<set $hunger += 5>>
+    陈默: {无奈} 只能再减少配给了……每人每天一碗稀粥。
+    王秀英: {叹气} 孩子们已经饿得直哭了……
+    陈默: {痛苦} 我知道……但这是唯一的办法……
+    <<set $food_supply -= 20>>
+    <<jump FoodShortage_01_End>>
+
+-> 优先保证儿童和老人
+    <<set $choice = "priority">>
+    <<set $morale += 5>>
+    <<set $hunger += 3>>
+    陈默: {温和} 孩子和老人先吃，年轻人可以多撑几天。
+    王秀英: {感动} 这样对你们不公平……
+    陈默: {微笑} 我们身体强壮，能扛过去的。
+    <<set $relationship_wang += 5>>
+    <<jump FoodShortage_01_End>>
+===
+
+title: FoodShortage_01_Dangerous
+tags: 随机事件, 食物短缺, 危险
+---
+旁白: {紧张} 陈默在废墟中搜寻时，遇到了日本巡逻队……
+
+<<if $stealth_skill >= 5>>
+    陈默: {小声} 糟糕……快躲起来……
+    旁白: {描述} 凭借之前积累的经验，陈默成功躲过了巡逻。
+    <<jump FoodShortage_01_Success>>
+<<else>>
+    日本士兵: "你的，什么的干活？"
+    <<set $danger_level += 10>>
+    <<jump FoodShortage_01_Caught>>
+<<endif>>
+===
+
+title: FoodShortage_01_Success
+tags: 随机事件, 食物短缺, 成功
+---
+旁白: {欣慰} 在一处倒塌的商铺废墟中，陈默找到了一些米袋。
+
+陈默: {惊喜} 太好了！这些够大家吃一周的！
+
+<<set $food_supply += 50>>
+<<set $morale += 15>>
+<<set $stealth_skill += 1>>
+
+王秀英: {感激} 陈默！你真是我们的救星！
+
+<<jump FoodShortage_01_End>>
+===
+
+title: FoodShortage_01_Caught
+tags: 随机事件, 食物短缺, 被抓
+---
+日本士兵: "八嘎！抓起来！"
+
+陈默: {恐慌} 我……我只是找点吃的……
+
+<<if $has_german_pass>>
+    陈默: {急忙} 我是拉贝先生的助手！
+    旁白: {描述} 陈默出示了德国护照证明……
+    日本士兵: {不耐烦} "滚！"
+    <<set $danger_level += 5>>
+    <<jump FoodShortage_01_End>>
+<<else>>
+    旁白: {沉重} 陈默被殴打了一顿，空手而归……
+    <<set $health -= 20>>
+    <<set $morale -= 15>>
+    <<jump FoodShortage_01_End>>
+<<endif>>
+===
+
+title: FoodShortage_01_End
+tags: 随机事件, 结束
+---
+<<set $event_food_shortage_01 = true>>
+===
+
+title: FoodShortage_02
+tags: 随机事件, 食物短缺, 高频
+---
+<<set $event_type = "food_shortage">>
+
+难民甲: {愤怒} 凭什么他家有三个人，拿的粮食却和我家五口人一样多？
+
+难民乙: {不满} 就是！这不公平！
+
+旁白: {紧张} 因为食物分配问题，难民们起了争执……
+
+-> 按人头平均分配
+    <<set $distribution_method = "per_capita">>
+    陈默: {坚定} 按人头算，每人一份，不多不少。
+    难民甲: {满意} 这才对嘛！
+    <<set $morale += 10>>
+    <<set $fairness += 5>>
+    <<jump FoodShortage_02_End>>
+
+-> 按家庭单位分配
+    <<set $distribution_method = "per_family">>
+    陈默: {解释} 按家庭算更便于管理，也减少争执。
+    难民乙: {不服} 那我们人多的不是吃亏了？
+    <<set $morale -= 5>>
+    <<jump FoodShortage_02_End>>
+
+-> 让大家自己协商
+    <<set $distribution_method = "negotiate">>
+    陈默: {为难} 你们自己商量吧……
+    难民甲: {怒} 你这是不负责任！
+    <<set $morale -= 15>>
+    <<set $leadership -= 5>>
+    <<jump FoodShortage_02_End>>
+===
+
+title: FoodShortage_02_End
+tags: 随机事件, 结束
+---
+<<set $event_food_shortage_02 = true>>
+===
+
+title: MedicalEmergency_01
+tags: 随机事件, 医疗紧急, 中频
+---
+<<set $event_type = "medical_emergency">>
+
+小女孩: {痛苦} 娘……我好疼……
+
+母亲: {哭泣} 我的女儿发高烧三天了！求求你救救她！
+
+王秀英: {为难} 陈默，药品只剩一点了……
+
+-> 用药救治女孩
+    <<set $medicine_supply -= 30>>
+    陈默: {温和} 孩子要紧，先给她用药。
+    母亲: {感激涕零} 谢谢！谢谢您！
+    <<set $morale += 10>>
+    <<set $reputation += 5>>
+    <<if $medicine_quality >= 5>>
+        旁白: {欣慰} 女孩的烧退了……
+        <<set $morale += 15>>
+    <<else>>
+        旁白: {遗憾} 药效不够……女孩还在发烧……
+        <<set $morale -= 5>>
+    <<endif>>
+    <<jump MedicalEmergency_01_End>>
+
+-> 保留药品以备不时之需
+    <<set $choice = "save_medicine">>
+    陈默: {痛苦} 对不起……我们必须留着药品应对更紧急的情况……
+    母亲: {绝望} 你……你这是见死不救！
+    <<set $morale -= 20>>
+    <<set $reputation -= 10>>
+    <<jump MedicalEmergency_01_End>>
+
+-> 尝试用土方法治疗
+    <<set $choice = "traditional">>
+    陈默: {安慰} 我知道一些物理降温的方法……
+    王秀英: {帮忙} 我去打点冷水来。
+    <<if $medical_skill >= 3>>
+        旁白: {欣慰} 通过物理降温，女孩的烧渐渐退了……
+        <<set $morale += 5>>
+        <<set $medical_skill += 1>>
+    <<else>>
+        旁白: {遗憾} 物理降温效果有限……
+        <<set $morale -= 10>>
+    <<endif>>
+    <<jump MedicalEmergency_01_End>>
+===
+
+title: MedicalEmergency_01_End
+tags: 随机事件, 结束
+---
+<<set $event_medical_emergency_01 = true>>
+===
+
+title: MedicalEmergency_02
+tags: 随机事件, 医疗紧急, 产妇
+---
+<<set $event_type = "medical_emergency">>
+
+难民: {急促} 不好了！有个产妇要生了！
+
+王秀英: {紧张} 这种环境下生孩子……太危险了……
+
+陈默: {担忧} 我们连基本的消毒条件都没有……
+
+-> 帮助产妇接生
+    <<set $choice = "help_delivery">>
+    陈默: {坚定} 不能见死不救，我们尽力而为！
+    <<if $has_medical_tools>>
+        旁白: {欣慰} 在简陋的条件下，产妇平安产下婴儿……
+        <<set $morale += 25>>
+        <<set $hope += 10>>
+        产妇: {虚弱但欣慰} 谢谢……谢谢你们……
+        旁白: {温暖} 婴儿的哭声，是这黑暗中的一线光明……
+    <<else>>
+        旁白: {紧张} 接生过程很艰难……
+        <<if $medical_skill >= 4>>
+            旁白: {欣慰} 凭借经验，母子平安……
+            <<set $morale += 20>>
+            <<set $medical_skill += 2>>
+        <<else>>
+            旁白: {沉重} 产妇大出血……情况危急……
+            <<set $morale -= 15>>
+            <<jump MedicalEmergency_02_Crisis>>
+        <<endif>>
+    <<endif>>
+    <<jump MedicalEmergency_02_End>>
+
+-> 让有经验的老人帮忙
+    <<set $choice = "elder_help">>
+    陈默: {询问} 有没有接生过的老人家？
+    老妇: {站出来} 我年轻时当过接生婆……
+    旁白: {描述} 在老妇的帮助下，产妇顺利生产……
+    <<set $morale += 15>>
+    <<set $community_bond += 5>>
+    <<jump MedicalEmergency_02_End>>
+===
+
+title: MedicalEmergency_02_Crisis
+tags: 随机事件, 医疗危机
+---
+王秀英: {急} 产妇流血不止！怎么办？！
+
+-> 用止血药
+    <<if $medicine_supply >= 20>>
+        陈默: {果断} 用止血药！
+        <<set $medicine_supply -= 20>>
+        旁白: {欣慰} 出血被控制住了……
+        <<set $morale += 10>>
+    <<else>>
+        陈默: {绝望} 药……不够了……
+        旁白: {沉重} 产妇因失血过多……
+        <<set $morale -= 30>>
+        <<set $hope -= 15>>
+    <<endif>>
+    <<jump MedicalEmergency_02_End>>
+
+-> 压迫止血
+    陈默: {急} 快！用布按压伤口！
+    <<if $medical_skill >= 5>>
+        旁白: {紧张} 经过半小时的急救，出血终于止住了……
+        <<set $morale += 5>>
+        <<set $medical_skill += 1>>
+    <<else>>
+        旁白: {遗憾} 压迫止血效果不佳……
+        <<set $morale -= 25>>
+    <<endif>>
+    <<jump MedicalEmergency_02_End>>
+===
+
+title: MedicalEmergency_02_End
+tags: 随机事件, 结束
+---
+<<set $event_medical_emergency_02 = true>>
+===
+
+title: RefugeeConflict_01
+tags: 随机事件, 难民冲突, 中频
+---
+<<set $event_type = "refugee_conflict">>
+
+男人甲: {愤怒} 是你偷了我的粮食！
+
+男人乙: {否认} 我没有！你别冤枉好人！
+
+旁白: {紧张} 两个难民因为粮食失窃吵了起来，眼看就要动手……
+
+-> 介入调解
+    <<set $choice = "mediate">>
+    陈默: {威严} 都住手！有话好好说！
+    男人甲: {激动} 陈先生，我的粮食确实少了！
+    陈默: {冷静} 先别急着指责，我们慢慢查清楚。
+    <<if $leadership >= 5>>
+        旁白: {描述} 经过询问，发现是老鼠偷吃了粮食……
+        陈默: {解释} 看，地上有鼠洞。不是他偷的。
+        男人甲: {尴尬} 对……对不起……
+        <<set $morale += 5>>
+        <<set $leadership += 1>>
+    <<else>>
+        旁白: {遗憾} 双方都不服气，冲突继续……
+        <<set $morale -= 10>>
+    <<endif>>
+    <<jump RefugeeConflict_01_End>>
+
+-> 让他们自己解决
+    <<set $choice = "ignore">>
+    陈默: {回避} 这是你们之间的事……
+    男人甲: {失望} 连你也不管了？
+    旁白: {沉重} 两人扭打在一起，其他难民也卷入争吵……
+    <<set $morale -= 20>>
+    <<set $order -= 10>>
+    <<jump RefugeeConflict_01_End>>
+
+-> 用自己的粮食补偿
+    <<set $choice = "compensate">>
+    陈默: {温和} 这样吧，我给你补上粮食。
+    男人甲: {感动} 陈先生……
+    陈默: {微笑} 大家都不容易，别为这点事伤了和气。
+    <<set $food_supply -= 5>>
+    <<set $morale += 15>>
+    <<set $reputation += 10>>
+    <<jump RefugeeConflict_01_End>>
+===
+
+title: RefugeeConflict_01_End
+tags: 随机事件, 结束
+---
+<<set $event_refugee_conflict_01 = true>>
+===
+
+title: RefugeeConflict_02
+tags: 随机事件, 难民冲突, 高频
+---
+年轻人: {愤怒} 凭什么他就能住在角落里，我们要挤在门口受冻？
+
+中年人: {不满} 我先来的！先到先得！
+
+旁白: {描述} 因为住宿位置分配不均，难民们产生了矛盾……
+
+-> 重新分配位置
+    <<set $choice = "redistribute">>
+    陈默: {公平} 我们抽签决定，谁也别抱怨。
+    年轻人: {勉强接受} 好吧……
+    <<set $fairness += 10>>
+    <<set $morale += 5>>
+    <<jump RefugeeConflict_02_End>>
+
+-> 维持现状
+    <<set $choice = "maintain">>
+    陈默: {坚持} 先来后到，这是规矩。
+    年轻人: {不服} 这算什么规矩！
+    <<set $morale -= 15>>
+    <<jump RefugeeConflict_02_End>>
+
+-> 轮流换位置
+    <<set $choice = "rotate">>
+    陈默: {建议} 每三天换一次位置，大家轮流。
+    中年人: {点头} 这样倒也公平。
+    <<set $fairness += 15>>
+    <<set $morale += 10>>
+    <<set $leadership += 2>>
+    <<jump RefugeeConflict_02_End>>
+===
+
+title: RefugeeConflict_02_End
+tags: 随机事件, 结束
+---
+<<set $event_refugee_conflict_02 = true>>
+===
+
+title: FindSupplies_01
+tags: 随机事件, 发现物资, 低频
+---
+<<set $event_type = "find_supplies">>
+
+旁白: {描述} 在清理废墟时，陈默发现了一个隐蔽的地窖……
+
+陈默: {惊喜} 这里面好像有东西……
+
+-> 进去查看
+    <<set $choice = "investigate">>
+    陈默: {谨慎} 我进去看看。
+    旁白: {描述} 地窖里堆满了罐头、米面、药品……
+    陈默: {震惊} 天哪！这些东西够我们用一个月了！
+    <<set $food_supply += 80>>
+    <<set $medicine_supply += 50>>
+    <<set $morale += 30>>
+    <<jump FindSupplies_01_End>>
+
+-> 小心可能有危险
+    <<set $choice = "cautious">>
+    陈默: {警惕} 等等，先看看是否安全……
+    <<if $survival_skill >= 4>>
+        旁白: {描述} 陈默发现地窖结构稳定，便进去搜寻……
+        <<set $food_supply += 80>>
+        <<set $medicine_supply += 50>>
+        <<set $survival_skill += 1>>
+    <<else>>
+        旁白: {遗憾} 陈默太过谨慎，最后决定不冒险……
+        <<set $morale -= 5>>
+    <<endif>>
+    <<jump FindSupplies_01_End>>
+===
+
+title: FindSupplies_01_End
+tags: 随机事件, 结束
+---
+<<set $event_find_supplies_01 = true>>
+===
+
+title: FindSupplies_02
+tags: 随机事件, 发现物资, 中频
+---
+旁白: {描述} 陈默在街上发现了一辆被遗弃的马车，上面还有些物资……
+
+-> 拿走所有物资
+    <<set $choice = "take_all">>
+    陈默: {实用} 这些东西现在没人要，正好我们需要。
+    <<set $food_supply += 30>>
+    <<set $supplies += 20>>
+    旁白: {描述} 但第二天，马车的主人出现了……
+    车主: {愤怒} 我的东西！是你偷的？！
+    <<set $morale -= 15>>
+    <<set $reputation -= 10>>
+    <<jump FindSupplies_02_End>>
+
+-> 只拿一部分
+    <<set $choice = "take_some">>
+    陈默: {谨慎} 留一半吧，万一主人回来找……
+    <<set $food_supply += 15>>
+    <<set $supplies += 10>>
+    旁白: {描述} 第二天，车主找到了陈默……
+    车主: {感激} 谢谢你只拿了一部分，还给我留了些……
+    <<set $morale += 10>>
+    <<set $reputation += 5>>
+    <<jump FindSupplies_02_End>>
+
+-> 留下标记等主人
+    <<set $choice = "leave_note">>
+    陈默: {正直} 我写张纸条，告诉主人来安全区找我。
+    旁白: {描述} 几天后，车主带着感激来到安全区……
+    车主: {感动} 在这乱世，还有你这样的好人……
+    <<set $morale += 20>>
+    <<set $reputation += 15>>
+    <<set $relationship_new += 5>>
+    <<jump FindSupplies_02_End>>
+===
+
+title: FindSupplies_02_End
+tags: 随机事件, 结束
+---
+<<set $event_find_supplies_02 = true>>
+===
+
+title: WeatherDisaster_01
+tags: 随机事件, 天气灾害, 低频
+---
+<<set $event_type = "weather_disaster">>
+
+旁白: {紧张} 天空突然乌云密布，寒风呼啸……
+
+王秀英: {担忧} 要下大雪了！窗户都破了，这么冷怎么办？
+
+-> 找东西堵住窗户
+    <<set $choice = "seal_windows">>
+    陈默: {行动} 快！找木板、布匹，把窗户堵上！
+    旁白: {描述} 大家齐心协力，用各种材料封住了窗户……
+    <<set $warmth += 15>>
+    <<set $morale += 10>>
+    <<jump WeatherDisaster_01_End>>
+
+-> 生火取暖
+    <<set $choice = "make_fire">>
+    陈默: {决定} 我们生火取暖吧。
+    王秀英: {担心} 会不会引来日本人注意？
+    <<if $stealth_skill >= 5>>
+        陈默: {安慰} 我知道怎么控制烟雾，不会被发现的。
+        <<set $warmth += 20>>
+        <<set $morale += 15>>
+    <<else>>
+        旁白: {紧张} 浓烟升起，引来了日本巡逻队……
+        <<set $danger_level += 15>>
+        <<set $morale -= 10>>
+    <<endif>>
+    <<jump WeatherDisaster_01_End>>
+
+-> 大家挤在一起取暖
+    <<set $choice = "huddle">>
+    陈默: {建议} 孩子和老人在中间，大家挤在一起。
+    旁白: {温暖} 虽然简陋，但人与人之间的温暖让这个寒夜不那么难熬……
+    <<set $warmth += 10>>
+    <<set $morale += 20>>
+    <<set $community_bond += 10>>
+    <<jump WeatherDisaster_01_End>>
+===
+
+title: WeatherDisaster_01_End
+tags: 随机事件, 结束
+---
+<<set $event_weather_disaster_01 = true>>
+===
+
+title: WeatherDisaster_02
+tags: 随机事件, 天气灾害, 暴雨
+---
+旁白: {描述} 暴雨倾盆而下，避难所的屋顶开始漏水……
+
+难民: {惊慌} 屋顶漏了！我们的粮食要被淋湿了！
+
+-> 先转移粮食
+    <<set $choice = "save_food">>
+    陈默: {急促} 快！把粮食搬到干燥的地方！
+    <<set $food_supply -= 5>>
+    旁白: {描述} 虽然行动迅速，但还是有些粮食受潮……
+    <<set $morale += 5>>
+    <<jump WeatherDisaster_02_End>>
+
+-> 先修补屋顶
+    <<set $choice = "fix_roof">>
+    陈默: {决断} 修屋顶要紧，不然越漏越多！
+    <<if $repair_skill >= 3>>
+        旁白: {欣慰} 屋顶被及时修好，损失降到最低……
+        <<set $food_supply -= 2>>
+        <<set $morale += 10>>
+        <<set $repair_skill += 1>>
+    <<else>>
+        旁白: {遗憾} 修补不够熟练，粮食损失惨重……
+        <<set $food_supply -= 15>>
+        <<set $morale -= 10>>
+    <<endif>>
+    <<jump WeatherDisaster_02_End>>
+
+-> 两边同时进行
+    <<set $choice = "both">>
+    陈默: {指挥} 一部分人转移粮食，一部分人修屋顶！
+    <<if $leadership >= 6>>
+        旁白: {描述} 在陈默的指挥下，大家配合默契……
+        <<set $food_supply -= 1>>
+        <<set $morale += 15>>
+        <<set $leadership += 1>>
+    <<else>>
+        旁白: {混乱} 指挥不当，大家手忙脚乱……
+        <<set $food_supply -= 10>>
+        <<set $morale -= 5>>
+    <<endif>>
+    <<jump WeatherDisaster_02_End>>
+===
+
+title: WeatherDisaster_02_End
+tags: 随机事件, 结束
+---
+<<set $event_weather_disaster_02 = true>>
+===

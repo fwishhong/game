@@ -1,0 +1,460 @@
+title: LimitedMedicine_01
+tags: 道德困境, 医疗资源, 高难度
+---
+<<set $dilemma_type = "medical_resource">>
+<<set $dilemma_severity = "extreme">>
+
+王秀英: {沉重} 陈默……只剩下一支青霉素了。
+
+旁白: {紧张} 同时有两个病人急需这支救命药……
+
+王秀英: {痛苦} 一个是五岁的孩子，肺炎高烧；另一个是年轻的父亲，伤口感染……
+
+王秀英: {颤抖} 只能救一个……你来决定……
+
+-> 救孩子
+    <<set $choice = "save_child">>
+    <<set $medicine_supply -= 1>>
+    陈默: {痛苦} 孩子……孩子还有一生要活……
+    父亲: {虚弱但理解} 救……救孩子吧……我已经……活够了……
+    旁白: {沉重} 父亲在两天后因感染去世，留下妻子和老母……
+    妻子: {悲痛欲绝} 我的孩子他爹……
+    <<set $morale -= 20>>
+    <<set $guilt += 30>>
+    <<set $children_saved += 1>>
+    <<jump LimitedMedicine_01_Consequence>>
+
+-> 救父亲
+    <<set $choice = "save_father">>
+    <<set $medicine_supply -= 1>>
+    陈默: {挣扎} 他是一家之主……一家人都指望他……
+    孩子母亲: {哭喊} 不！我的孩子！求求你！
+    旁白: {沉痛} 孩子在当晚去世……母亲抱着孩子哭了一夜……
+    母亲: {绝望} 我的宝贝……我的宝贝……
+    <<set $morale -= 25>>
+    <<set $guilt += 35>>
+    <<set $adults_saved += 1>>
+    <<jump LimitedMedicine_01_Consequence>>
+
+-> 分成两半，都试试
+    <<set $choice = "split_medicine">>
+    <<set $medicine_supply -= 1>>
+    陈默: {决绝} 分成两半，至少给两个人都一点希望……
+    王秀英: {担忧} 但这样药效不够……可能两个都救不活……
+    陈默: {坚持} 总比让一个人绝望地等死好……
+    <<if $medical_skill >= 6>>
+        旁白: {奇迹} 凭借精心护理，两个人都挺过了危险期……
+        <<set $morale += 30>>
+        <<set $hope += 20>>
+        <<set $reputation += 15>>
+    <<else>>
+        旁白: {悲剧} 药效不足……两个病人都在痛苦中离世……
+        <<set $morale -= 40>>
+        <<set $guilt += 50>>
+        <<set $hope -= 25>>
+    <<endif>>
+    <<jump LimitedMedicine_01_Consequence>>
+
+-> 让家属自己决定
+    <<set $choice = "let_families_decide">>
+    陈默: {逃避} 我……我做不了这个决定……你们家属自己商量……
+    两个家庭: {愤怒} 你这是把责任推给我们！
+    旁白: {混乱} 两家人为了药物争执不下，最后竟大打出手……
+    旁白: {悲剧} 在混乱中，药瓶被打翻摔碎……
+    <<set $medicine_supply -= 1>>
+    <<set $morale -= 50>>
+    <<set $leadership -= 15>>
+    <<set $guilt += 40>>
+    <<jump LimitedMedicine_01_Consequence>>
+===
+
+title: LimitedMedicine_01_Consequence
+tags: 道德困境, 后果
+---
+陈默（旁白）: {痛苦} 那一夜，我彻夜未眠……
+
+陈默（旁白）: {自责} 谁给了我决定他人生死的权力？
+
+<<if $guilt >= 50>>
+    旁白: {描述} 陈默陷入深深的自责，连续几天都恍恍惚惚……
+    王秀英: {担心} 陈默，这不是你的错……
+    <<set $mental_state -= 20>>
+<<endif>>
+
+<<set $dilemma_limited_medicine_01 = true>>
+===
+
+title: LimitedFood_01
+tags: 道德困境, 食物分配, 高难度
+---
+<<set $dilemma_type = "food_distribution">>
+
+旁白: {沉重} 食物只够十个人吃三天，但避难所里有十五个人……
+
+王秀英: {为难} 如果平均分，所有人都会挨饿……如果不平均分……
+
+-> 只给能劳动的人
+    <<set $choice = "workers_only">>
+    陈默: {冷酷} 只给能出去找食物的人吃，其他人暂时忍耐……
+    老人: {悲凉} 我们老了没用了，就该饿死吗……
+    <<set $morale -= 30>>
+    <<set $guilt += 25>>
+    <<set $survival_efficiency += 10>>
+    <<jump LimitedFood_01_End>>
+
+-> 优先老人和儿童
+    <<set $choice = "vulnerable_first">>
+    陈默: {温和} 老人和孩子优先，我们年轻人扛得住。
+    青年: {不满} 我们去冒险找食物，却要饿肚子？
+    <<set $morale -= 10>>
+    <<set $fairness += 10>>
+    <<set $hope += 15>>
+    <<jump LimitedFood_01_End>>
+
+-> 抽签决定
+    <<set $choice = "lottery">>
+    陈默: {无奈} 抽签吧……运气决定一切……
+    旁白: {描述} 命运残酷，有的家庭全中，有的全灭……
+    <<set $morale -= 20>>
+    <<set $fairness += 5>>
+    <<set $luck_importance += 10>>
+    <<jump LimitedFood_01_End>>
+
+-> 自己饿肚子，给大家分
+    <<set $choice = "self_sacrifice">>
+    陈默: {坚定} 我不吃了，把我的份分给大家。
+    王秀英: {感动} 陈默……
+    旁白: {温暖} 其他人也纷纷主动减少份额……
+    <<set $morale += 25>>
+    <<set $reputation += 20>>
+    <<set $hunger += 30>>
+    <<set $community_bond += 15>>
+    <<jump LimitedFood_01_End>>
+===
+
+title: LimitedFood_01_End
+tags: 道德困境, 结束
+---
+<<set $dilemma_limited_food_01 = true>>
+===
+
+title: HideInformation_01
+tags: 道德困境, 隐瞒信息, 中难度
+---
+<<set $dilemma_type = "hide_information">>
+
+旁白: {紧张} 陈默从日本兵口中偷听到，三天后会有大规模搜捕……
+
+王秀英: {低声} 如果告诉大家，可能会引起恐慌……
+
+王秀英: {担忧} 但如果不说，他们就没法做准备……
+
+-> 立即告诉所有人
+    <<set $choice = "tell_all">>
+    陈默: {严肃} 大家听着，三天后日本人会来搜查……
+    难民: {恐慌} 怎么办？我们要逃吗？
+    旁白: {混乱} 避难所陷入混乱，有人想逃，有人想躲……
+    <<set $morale -= 15>>
+    <<set $trust += 10>>
+    <<set $preparation_time = 3>>
+    <<jump HideInformation_01_Prepare>>
+
+-> 只告诉核心成员
+    <<set $choice = "tell_core">>
+    陈默: {小声} 王姐，老李，你们过来……我们秘密准备一下。
+    王秀英: {点头} 这样既能准备，又不引起恐慌。
+    <<set $morale += 5>>
+    <<set $trust -= 5>>
+    <<set $preparation_time = 3>>
+    <<jump HideInformation_01_Prepare>>
+
+-> 完全隐瞒
+    <<set $choice = "hide_all">>
+    陈默: {沉重} 不能说……会造成恐慌的……
+    王秀英: {迟疑} 可是……
+    陈默: {坚持} 我会想办法保护大家。
+    <<set $guilt += 20>>
+    <<set $burden += 15>>
+    <<set $preparation_time = 0>>
+    <<jump HideInformation_01_Prepare>>
+
+-> 编个借口让大家做准备
+    <<set $choice = "excuse">>
+    陈默: {装作轻松} 天气要变冷了，我们把东西整理一下，藏好贵重物品。
+    难民: {不疑有他} 好的。
+    <<set $morale += 5>>
+    <<set $trust -= 10>>
+    <<set $preparation_time = 2>>
+    <<jump HideInformation_01_Prepare>>
+===
+
+title: HideInformation_01_Prepare
+tags: 道德困境, 准备阶段
+---
+旁白: {描述} 三天很快过去，日本士兵冲进了避难所……
+
+<<if $preparation_time >= 3>>
+    旁白: {紧张} 因为提前准备，大家藏好了物资……
+    <<set $supplies_lost = 10>>
+    <<set $morale -= 5>>
+<<elseif $preparation_time >= 2>>
+    旁白: {紧张} 虽有准备，但仓促之下还是漏了些……
+    <<set $supplies_lost = 25>>
+    <<set $morale -= 10>>
+<<else>>
+    旁白: {混乱} 毫无准备的人们惊慌失措……
+    <<set $supplies_lost = 40>>
+    <<set $morale -= 25>>
+    难民: {愤怒} 陈默，你是不是早就知道了？！
+    <<set $trust -= 20>>
+<<endif>>
+
+<<set $dilemma_hide_information_01 = true>>
+===
+
+title: RiskForStranger_01
+tags: 道德困境, 冒险救人, 高难度
+---
+<<set $dilemma_type = "risk_for_stranger">>
+
+旁白: {紧急} 陈默外出时，听到巷子里传来女人的尖叫声……
+
+女人: {恐惧} 救命！放开我！
+
+日本士兵: {狞笑} "花姑娘！"
+
+旁白: {紧张} 日本兵正要拖走一个年轻女子……
+
+-> 冲出去阻止
+    <<set $choice = "intervene">>
+    陈默: {愤怒} 住手！
+    日本士兵: {转头} "你的，什么人？"
+    <<if $has_german_pass>>
+        陈默: {出示证件} 我是德国人的助手！
+        旁白: {紧张} 士兵犹豫了一下，放开了女人……
+        女人: {感激} 谢谢……谢谢您……
+        <<set $morale += 20>>
+        <<set $reputation += 25>>
+        <<set $people_saved += 1>>
+    <<else>>
+        旁白: {危险} 士兵恼羞成怒，举起了枪……
+        <<jump RiskForStranger_01_Danger>>
+    <<endif>>
+    <<jump RiskForStranger_01_End>>
+
+-> 去找拉贝先生帮忙
+    <<set $choice = "get_help">>
+    陈默: {急} 我去找拉贝先生！
+    旁白: {沉重} 等陈默带人回来时，女人已经不见了……
+    旁白: {遗憾} 三天后，有人在河边发现了她的尸体……
+    <<set $morale -= 25>>
+    <<set $guilt += 30>>
+    <<jump RiskForStranger_01_End>>
+
+-> 制造混乱引开士兵
+    <<set $choice = "distract">>
+    陈默: {计谋} 我得想办法……
+    旁白: {描述} 陈默推倒了远处的木箱，发出巨响……
+    日本士兵: {警觉} "什么声音？"
+    <<if $stealth_skill >= 5>>
+        旁白: {成功} 趁士兵查看时，女人逃走了……
+        <<set $morale += 15>>
+        <<set $people_saved += 1>>
+        <<set $stealth_skill += 1>>
+    <<else>>
+        旁白: {失败} 士兵很快反应过来……
+        <<set $morale -= 15>>
+        <<set $guilt += 20>>
+    <<endif>>
+    <<jump RiskForStranger_01_End>>
+
+-> 无奈地转身离开
+    <<set $choice = "walk_away">>
+    陈默: {痛苦} 对不起……对不起……我帮不了你……
+    女人: {绝望} 救命……救……
+    旁白: {沉重} 陈默逃也似地跑开了……但那声音在心中回荡……
+    <<set $guilt += 40>>
+    <<set $morale -= 20>>
+    <<set $mental_state -= 15>>
+    陈默（旁白）: {自责} 我是个懦夫……
+    <<jump RiskForStranger_01_End>>
+===
+
+title: RiskForStranger_01_Danger
+tags: 道德困境, 危险
+---
+旁白: {紧急} 士兵的枪口对准了陈默……
+
+<<if $combat_skill >= 4>>
+    陈默: {反应} 不好！
+    旁白: {惊险} 陈默一个翻滚躲开了子弹……
+    旁白: {混乱} 枪声引来了巡逻队，士兵匆忙逃离……
+    女人: {劫后余生} 您救了我的命……
+    <<set $morale += 15>>
+    <<set $reputation += 20>>
+    <<set $people_saved += 1>>
+<<else>>
+    旁白: {沉痛} 枪声响起……陈默倒在血泊中……
+    女人: {尖叫} 不！
+    旁白: {严重} 陈默身受重伤，生命垂危……
+    <<set $health -= 50>>
+    <<set $morale -= 30>>
+    <<if $health <= 0>>
+        旁白: {结束} 陈默的旅程在此画上了句号……
+        <<jump GameOver_Death>>
+    <<endif>>
+<<endif>>
+
+<<jump RiskForStranger_01_End>>
+===
+
+title: RiskForStranger_01_End
+tags: 道德困境, 结束
+---
+<<set $dilemma_risk_for_stranger_01 = true>>
+===
+
+title: TruthVsComfort_01
+tags: 道德困境, 真相与安慰, 中难度
+---
+<<set $dilemma_type = "truth_vs_comfort">>
+
+小男孩: {期待} 叔叔，我爹什么时候回来？
+
+旁白: {沉重} 孩子的父亲三天前出去找食物，被日本兵杀害了……
+
+小男孩: {天真} 娘说爹去很远的地方了，会带好吃的回来……
+
+-> 告诉他真相
+    <<set $choice = "tell_truth">>
+    陈默: {沉痛} 孩子……你爹……他不会回来了……
+    小男孩: {不解} 为什么？
+    陈默: {温柔} 他去了天堂……在那里保佑你……
+    小男孩: {崩溃} 不！我要爹！我要爹回来！
+    旁白: {心碎} 孩子哭了一整天……
+    <<set $morale -= 15>>
+    <<set $honesty += 10>>
+    <<jump TruthVsComfort_01_End>>
+
+-> 继续善意的谎言
+    <<set $choice = "lie">>
+    陈默: {微笑} 对，你爹在找好吃的，很快就回来。
+    小男孩: {开心} 我就知道！爹最疼我了！
+    陈默（旁白）: {痛苦} 看着孩子天真的笑容，我心如刀割……
+    <<set $guilt += 15>>
+    <<set $hope += 10>>
+    <<jump TruthVsComfort_01_End>>
+
+-> 转移话题
+    <<set $choice = "evade">>
+    陈默: {温和} 你爹让我照顾你，我们去玩游戏吧。
+    小男孩: {迟疑} 好吧……
+    旁白: {描述} 暂时逃避了问题，但孩子总有一天会知道……
+    <<set $morale -= 5>>
+    <<jump TruthVsComfort_01_End>>
+===
+
+title: TruthVsComfort_01_End
+tags: 道德困境, 结束
+---
+<<set $dilemma_truth_vs_comfort_01 = true>>
+===
+
+title: TruthVsComfort_02
+tags: 道德困境, 真相与安慰, 安全区
+---
+难民: {绝望} 陈先生，我们真的能活下去吗……
+
+旁白: {沉重} 陈默知道历史——六周的屠杀，三十万人遇难……
+
+难民: {哀求} 说句实话吧……我们是不是都要死在这里……
+
+-> 告诉他们希望很渺茫
+    <<set $choice = "realistic">>
+    陈默: {沉重} 实话说……情况很不乐观……
+    难民: {崩溃} 那我们还有什么活头……
+    旁白: {绝望} 避难所笼罩在绝望的气氛中……
+    <<set $morale -= 30>>
+    <<set $hope -= 20>>
+    <<jump TruthVsComfort_02_End>>
+
+-> 鼓励他们要有信心
+    <<set $choice = "encourage">>
+    陈默: {坚定} 只要我们团结一心，一定能撑过去！
+    难民: {犹豫} 真的吗……
+    陈默: {确信} 我保证！
+    <<set $morale += 15>>
+    <<set $hope += 15>>
+    <<set $burden += 10>>
+    <<jump TruthVsComfort_02_End>>
+
+-> 给他们具体的生存计划
+    <<set $choice = "practical">>
+    陈默: {理性} 听我说，我们要定时巡逻，分配物资，保持纪律……
+    难民: {稍安} 至少还有计划……
+    <<set $morale += 10>>
+    <<set $order += 10>>
+    <<jump TruthVsComfort_02_End>>
+===
+
+title: TruthVsComfort_02_End
+tags: 道德困境, 结束
+---
+<<set $dilemma_truth_vs_comfort_02 = true>>
+===
+
+title: SacrificeSelf_01
+tags: 道德困境, 自我牺牲, 极难
+---
+<<set $dilemma_type = "self_sacrifice">>
+
+旁白: {紧急} 日本士兵要抓十个壮丁去做苦工……
+
+日本军官: "选十个人！快！"
+
+旁白: {沉重} 做苦工的人，十有八九回不来……
+
+-> 自己顶替其中一个
+    <<set $choice = "volunteer">>
+    陈默: {站出来} 我去！
+    王秀英: {惊恐} 陈默！你疯了吗？！
+    陈默: {平静} 我是外来的，他们都有家人……
+    旁白: {感动} 人群中爆发出压抑的哭声……
+    <<set $morale += 30>>
+    <<set $reputation += 50>>
+    <<set $self_sacrifice_count += 1>>
+    <<jump SacrificeSelf_01_Outcome>>
+
+-> 让大家抽签
+    <<set $choice = "lottery">>
+    陈默: {沉重} 抽签吧……公平一些……
+    <<set $morale -= 10>>
+    <<set $fairness += 5>>
+    <<jump SacrificeSelf_01_Outcome>>
+
+-> 挑选没有家人的人
+    <<set $choice = "select_alone">>
+    陈默: {冷酷} 选那些孤身一人的……
+    孤儿: {恐惧} 不要……不要带我走……
+    <<set $morale -= 25>>
+    <<set $guilt += 30>>
+    <<jump SacrificeSelf_01_Outcome>>
+===
+
+title: SacrificeSelf_01_Outcome
+tags: 道德困境, 后果
+---
+<<if $choice == "volunteer">>
+    旁白: {转折} 就在陈默要被带走时，拉贝先生及时赶到……
+    拉贝: {严厉} "Stop! These people are under German protection!"
+    旁白: {欣慰} 日本人忌惮德国的关系，放弃了抓人……
+    陈默: {劫后余生} 拉贝先生……
+    拉贝: {温和} 年轻人，勇气可嘉，但要学会保护自己。
+<<else>>
+    旁白: {沉痛} 十个人被带走了……再也没有回来……
+    <<set $people_lost += 10>>
+    <<set $guilt += 20>>
+<<endif>>
+
+<<set $dilemma_sacrifice_self_01 = true>>
+===
