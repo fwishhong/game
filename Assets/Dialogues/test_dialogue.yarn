@@ -1,0 +1,163 @@
+title: Start
+tags: test
+---
+<<setName 系统>>
+欢迎来到《秦淮旧梦》！
+
+这是一个测试对话。
+
+<<setName 陈默>>
+我是陈默，一个历史系的研究生。
+
+今天是2024年12月13日，南京大屠杀死难者国家公祭日。
+
+我来到了侵华日军南京大屠杀遇难同胞纪念馆。
+
+-> 继续参观
+    <<jump MemorialHall>>
+-> 测试选项系统
+    <<jump TestOptions>>
+===
+
+title: MemorialHall
+tags: test, chapter0
+---
+<<setName 陈默>>
+纪念馆很安静，只有脚步声在回响。
+
+墙上是遇难者的名单，密密麻麻，一个接一个。
+
+我的目光在名单上扫过...
+
+突然，我看到了一个名字——陈默。
+
+和我一样的名字...
+
+-> 触摸名字墙
+    <<jump TouchWall>>
+-> 继续参观
+    我决定先继续参观。
+===
+
+title: TouchWall
+tags: test, critical
+---
+<<setName 陈默>>
+我伸手触摸那个名字...
+
+<<wait 1>>
+
+突然，一阵强烈的眩晕！
+
+<<wait 0.5>>
+
+周围的光线开始扭曲...
+
+<<wait 0.5>>
+
+我感觉自己在坠落...
+
+<<setName 系统>>
+[白光吞噬了一切]
+
+<<wait 2>>
+
+[当你再次睁开眼睛时...]
+
+<<setName 陈默>>
+这是...哪里？
+
+周围的建筑变了，天空是灰蒙蒙的...
+
+远处传来爆炸声...
+
+<<setName 系统>>
+你穿越到了1937年的南京。
+
+===
+
+title: TestOptions
+tags: test
+---
+<<setName 系统>>
+这是一个测试选项的对话节点。
+
+请选择一个选项：
+
+-> 选项A：测试变量
+    <<set $test_variable = true>>
+    你选择了选项A。
+    变量 test_variable 已设置为 true。
+    <<jump TestOptions>>
+
+-> 选项B：测试条件
+    <<if $test_variable>>
+        变量 test_variable 是 true！
+    <<else>>
+        变量 test_variable 不是 true。
+    <<endif>>
+    <<jump TestOptions>>
+
+-> 选项C：结束测试
+    测试结束！
+===
+
+title: wang_fugui_talk_01
+tags: npc, wang_fugui
+---
+<<setName 王掌柜>>
+哎呦，这位先生，您是新来的吧？
+
+我是王掌柜，开棺材铺的。
+
+<<setName 陈默>>
+王掌柜您好...
+
+<<setName 王掌柜>>
+{摆手} 甭客气，甭客气。
+
+这世道啊，能活着就不错了。
+
+您一个人吗？家里人呢？
+
+-> 说实话
+    <<setName 陈默>>
+    我...我迷路了。
+    <<jump wang_fugui_talk_01_honest>>
+
+-> 含糊其辞
+    <<setName 陈默>>
+    我也不太清楚...
+    <<jump wang_fugui_talk_01_vague>>
+===
+
+title: wang_fugui_talk_01_honest
+tags: npc, wang_fugui
+---
+<<setName 王掌柜>>
+{关切} 迷路了？这大冬天的，可够呛。
+
+来来来，先到我的铺子里暖和暖和。
+
+<<setName 陈默>>
+谢谢您...
+
+<<set $wang_fugui_relationship += 5>>
+<<setName 系统>>
+[王掌柜的好感度 +5]
+===
+
+title: wang_fugui_talk_01_vague
+tags: npc, wang_fugui
+---
+<<setName 王掌柜>>
+{疑惑} 不太清楚？
+
+{叹气} 也是，这世道，谁还能说清楚自己的事儿呢。
+
+罢了罢了，都是逃难的人。
+
+<<set $wang_fugui_relationship += 2>>
+<<setName 系统>>
+[王掌柜的好感度 +2]
+===
